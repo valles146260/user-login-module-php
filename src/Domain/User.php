@@ -10,4 +10,8 @@ class User
     {
         $this->userName = $userName;
     }
+
+    public function getUserName(): string{
+        return $this->userName;
+    }
 }
