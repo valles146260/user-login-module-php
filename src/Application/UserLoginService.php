@@ -37,4 +37,12 @@ class UserLoginService
         return $this->facebookSessionManager->getSessions();
     }
 
+    public function manualLogout(User $user): string
+    {
+        if (in_array($user->getUserName(), $this->loggedUsers)) {
+            return "OK";
+        }
+        return "User not logged in";
+    }
+
 }

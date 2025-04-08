@@ -51,7 +51,7 @@ final class UserLoginServiceTest extends TestCase
      */
     public function getNumberOfSession(): void
     {
-        // Crear el mock de la dependencia
+        // Crear el mock para hacer un doble
         $facebookSessionManager = Mockery::mock(FacebookSessionManager::class);
         $facebookSessionManager->allows()->getSessions()->andReturn(4);
 
@@ -61,5 +61,21 @@ final class UserLoginServiceTest extends TestCase
         // Comprobar que devuelve el número correcto de sesiones
         $this->assertSame(4, $userLoginService->getExternalSession());
     }
+
+    /**
+     * @test
+     */
+    public function logoutUser()
+    {
+        $user = new User("Asier");
+        $FacebookSessionManager = new FacebookSessionManager();
+        $userLoginService = new UserLoginService($FacebookSessionManager);
+        $userLoginService->manualLogin($user);
+        $this->assertSame("Asier", $userLoginService->getLoggedUser($user));
+
+        $this->assertSame("OK", $userLoginService->manualLogout($user));
+    }
+
+
 }
 
