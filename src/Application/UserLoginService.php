@@ -14,13 +14,12 @@ class UserLoginService
     {
     }
 
-
     /**
      * @throws Exception
      */
     public function manualLogin(User $user): void
     {
-        if (in_array($user->getUserName(), $this->loggedUsers)) {
+        if ($this->isUserLogged($user)) {
             throw new Exception("User already logged in");
         }
 
@@ -39,10 +38,15 @@ class UserLoginService
 
     public function manualLogout(User $user): string
     {
-        if (in_array($user->getUserName(), $this->loggedUsers)) {
+        if ($this->isUserLogged($user)) {
             return "Ok";
         }
         return "User not found";
+    }
+
+    public function isUserLogged(User $user): bool
+    {
+        return in_array($user->getUserName(), $this->loggedUsers);
     }
 
 }

@@ -65,7 +65,7 @@ final class UserLoginServiceTest extends TestCase
     /**
      * @test
      */
-    public function logoutUser()
+    public function userIsLoggedOut()
     {
         $facebookSessionManager = Mockery::mock(FacebookSessionManager::class);
         $user = new User("Asier");
