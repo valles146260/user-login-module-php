@@ -40,9 +40,9 @@ class UserLoginService
     public function manualLogout(User $user): string
     {
         if (in_array($user->getUserName(), $this->loggedUsers)) {
-            return "OK";
+            return "Ok";
         }
-        return "User not logged in";
+        return "User not found";
     }
 
 }
